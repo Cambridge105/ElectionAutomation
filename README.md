@@ -23,7 +23,8 @@ This is all based on a 3 second delay to TX.
 ## The sequence file:
 The sequence file is made up of a number of other files, central to which are the three per-constituency package files: <constituency>_MP3WRAP.mp3
 
-## The constituency package files are formed of an intro, the packages from the Dropbox (a file called results.mp3 / results.wav first, then the next two latest clips) and an outro and a jingle. If there are no clips, the whole file is 0 bytes (ie we don't intro when there's nothing to intro)
+## The constituency package files:
+These are formed of an intro, the packages from the Dropbox (a file called results.mp3 / results.wav first, then the next two latest clips) and an outro and a jingle. If there are no clips, the whole file is 0 bytes (ie we don't intro when there's nothing to intro)
 
 ## Making files safe
 Because we don't know exactly what format of MP3 / wav (bit rate, sample rate, channels) the correspondents will add to the dropbox, everything is re-sampled by ffmpeg and re-saved in a clips_safe/ directory 
