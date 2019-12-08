@@ -1,0 +1,35 @@
+# Edit this file to introduce tasks to be run by cron.
+# 
+# Each task to run has to be defined through a single line
+# indicating with different fields when the task will be run
+# and what command to run for the task
+# 
+# To define the time you can provide concrete values for
+# minute (m), hour (h), day of month (dom), month (mon),
+# and day of week (dow) or use '*' in these fields (for 'any').# 
+# Notice that tasks will be started based on the cron's system
+# daemon's notion of time and timezones.
+# 
+# Output of the crontab jobs (including errors) is sent through
+# email to the user the crontab file belongs to (unless redirected).
+# 
+# For example, you can run a backup of all your user accounts
+# at 5 a.m every week with:
+# 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/
+# 
+# For more information see the manual pages of crontab(5) and cron(8)
+# 
+# m h  dom mon dow   command
+1,6,11,16,21,26,31,36,41,46,51,56 * * * * rsync -a /home/dnas2/Dropbox/Cambridge\ 105\ News/_ElectionAutomatedOvernight/ /home/liquidsoap/radio/elex/clips
+#2,7,12,17,22,27,32,37,42,47,52,57 * * * * ls -1 /home/liquidsoap/radio/elex/clips/ | grep '\.mp3$' | sed 's/^/clips\//' > /home/liquidsoap/radio/elex/clips.m3u
+19 * * * * rm /home/liquidsoap/radio/elex/snrnews-safe.mp3
+20 * * * * wget -O /home/liquidsoap/radio/elex/snrnews.mp3 https://video.news.sky.com/snr/news/snrnews.mp3
+21 * * * * ffmpeg -i /home/liquidsoap/radio/elex/snrnews.mp3 -ab 192k -ac 2 -ar 44100 /home/liquidsoap/radio/elex/snrnews-safe.mp3
+52,22 * * * * python /home/liquidsoap/radio/elex/make_package.py cambridge
+52,22 * * * * python /home/liquidsoap/radio/elex/make_package.py s_cambs
+52,22 * * * * python /home/liquidsoap/radio/elex/make_package.py s_e_cambs
+*/5 * * * * python /home/liquidsoap/radio/elex/convert_wav_mp3.py cambridge
+*/5 * * * * python /home/liquidsoap/radio/elex/convert_wav_mp3.py s_cambs
+*/5 * * * * python /home/liquidsoap/radio/elex/convert_wav_mp3.py s_e_cambs
+54,24 * * * * python /home/liquidsoap/radio/elex/make_sequence.py
+
